@@ -36,7 +36,9 @@ module TalkUp
 
     configure :production do
       use Rack::SslEnforcer, :hsts => true
-    end
 
+      use Rack::Session::Redis,
+          expire_after: ONE_MONTH, redis_server: App.config.REDIS_URL
+    end
   end
 end
