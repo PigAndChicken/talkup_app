@@ -13,11 +13,6 @@ module TalkUp
     require_relative 'auth'
     require_relative 'account'
 
-    ONE_MONTH = 30*24*60*60
-
-    use Rack::Session::Cookie, expire_after: ONE_MONTH,
-        secret: config.SESSION_SECRET
-
     route do |routing|
       @current_account = session[:current_account]
       @current_account = JSON.parse @current_account.message if @current_account
