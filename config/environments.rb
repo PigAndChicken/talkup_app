@@ -11,10 +11,10 @@ module TalkUp
     Econfig.env = environment.to_s
     Econfig.root = '.'
 
-    # configure do
-    #   # SecureSession.setup(config)
-    #   # SecureMessage.setup(config)
-    # end
+    configure do
+      SecureSession.setup(config)
+      SecureMessage.setup(config)
+    end
 
     ONE_MONTH = 30 * 24 * 60 * 60
 
