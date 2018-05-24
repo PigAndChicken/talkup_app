@@ -11,9 +11,6 @@ module TalkUp
           end
         end
 
-        # routing.on 'register' do
-        #   #####
-        # end
       end
     end
   end

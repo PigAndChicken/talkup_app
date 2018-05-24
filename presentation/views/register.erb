@@ -1,4 +1,4 @@
-<!-- <div class="bs-docs-section">
+<div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
       <div class="page-header">
@@ -10,35 +10,32 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="bs-component">
-        <form>
+        <form action="/auth/register" method="post" id="form-register">
           <fieldset>
             <div class="form-group">
-
-              <label for="exampleInputUserName">User Name</label>
-              <input name="username" class="form-control" id="exampleInputUserName"
-                     aria-describedby="userNameHelp" placeholder="Enter User Name">
+              <label for="InputUserName" class="font-weight-bold">User Name</label>
+              <input name="username" class="form-control" id="InputUserName"
+                     aria-describedby="userNameHelp" placeholder="User name for login">
               <small id="userNameHelp" class="form-text text-muted">
                 User name will be used for login.
               </small>
 
-              <label for="exampleInputEmail">Email</label>
-              <input name="email" class="form-control" id="exampleInputEmail"
-                     aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">
-                Your email address will not show on your public profile page.
-              </small>
+              <label for="InputEmail" class="font-weight-bold">Email</label>
+              <input name="email" class="form-control" id="InputEmail"
+                     aria-describedby="emailHelp" placeholder="Your email address">
 
-              <label for="exampleInputPassword">Password</label>
+              <label for="InputPassword" class="font-weight-bold">Password</label>
               <input name="password" class="form-control" id="exampleInputPassword"
-                     aria-describedby="passwordHelp" placeholder="Enter Password">
-              <small id="passwordHelp" class="form-text text-muted">
-                Be carefull when typing.
-              </small>
-
+                     aria-describedby="passwordHelp" placeholder="Your password">
             </div>
           </fieldset>
         </form>
+
+        <div class="bs-component">
+          <button type="submit" class="btn btn-secondary"
+                  form="form-register" id="button-register"> SUBMIT </button>
+        </div>
       </div>
     </div>
   </div>
-</div> -->
+</div>
