@@ -8,5 +8,5 @@ test:
   APP_URL: http://localhost:3000
 
 production:
-  API_URL: https://talkup-api.herokuapp.com/
+  API_URL: https://talkup-api.herokuapp.com/api/v0.1
   APP_URL: https://talkup-app.herokuapp.com/
