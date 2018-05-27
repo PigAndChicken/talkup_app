@@ -1,8 +1,6 @@
 module TalkUp
   # Web App for login (authentication)
   class App < Roda
-    class UnauthorizedError < StandardError; end
-    class RegisterError < StandardError; end
 
     route('auth') do |routing|
       @login_route = '/auth/login'
@@ -14,16 +12,18 @@ module TalkUp
 
         # POST /auth/login
         routing.post do
-          account_response =  ApiGateway.new.account_auth( routing.params['username'],
-                                                           routing.params['password'] )
-          raise(UnauthorizedError) unless account_response.code == 200
+          account_response = AuthenticateAccount.new(App.config)
+                                                .call(routing.params['username'],
+                                                      routing.params['password'])
+          SecureSession.new(session).set(:current_account, account_response.message)
+          account_info = TalkUp::AccountRepresenter.new(OpenStruct.new)
+                                           .from_json account_response.message
+          account = Views::Account.new(account_info)
 
-          session[:current_account] = account_response
-          current_username = JSON.parse(account_response.message)['username']
-          flash[:notice] = "Welcome to TalkUp, #{current_username}!"
+          flash[:notice] = "Welcome to TalkUp, #{account.username}!"
           routing.redirect '/'
         rescue StandardError
-          flash[:error] = 'Username and Password did not match our records'
+          flash[:error] = 'Username and password did not match records'
           routing.redirect @login_route
         end
       end
@@ -31,24 +31,24 @@ module TalkUp
       routing.on 'logout' do
         # GET /auth/logout
         routing.get do
-          session[:current_account] = nil
+          # session[:current_account] = nil
+          SecureSession.new(session).delete(:current_account)
           routing.redirect @login_route
         end
       end
 
-      # POST /auth/register
       @register_route = '/auth/register'
       routing.is 'register' do
+        # GET /auth/register
         routing.get do
           view :register
         end
 
+        # POST /auth/register
         routing.post do
-          account_info =  ApiGateway.new.account_create(
-                          { username: routing.params['username'],
-                            email: routing.params['email'],
-                            password: routing.params['password'] })
-          raise(RegisterError) unless account_info.code == 201
+          CreateAccount.new(App.config).call(routing.params['username'],
+                                             routing.params['email'],
+                                             routing.params['password'])
 
           flash[:notice] = "Please login with your account information"
           routing.redirect @login_route

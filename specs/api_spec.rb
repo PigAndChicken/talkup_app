@@ -17,7 +17,7 @@ describe 'Test Api gateway' do
         @gateway.account_create(DATA[:accounts][0])
         response = @gateway.account_create(DATA[:accounts][0])
         _(response.code).must_equal 400
-        _(response.message).must_include 'account_errors'
+        _(response.message).must_include 'errors'
       end
     end
 

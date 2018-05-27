@@ -23,6 +23,11 @@ gem 'http'
 gem 'redis'
 gem 'redis-rack'
 
+# Application related
+gem 'dry-validation'
+gem 'multi-json'
+gem 'roar'
+
 # Services
 gem 'dry-monads'
 gem 'dry-transaction'
