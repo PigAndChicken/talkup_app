@@ -14,10 +14,10 @@
       </li>
 
       <!-- if login status, navbar shows "Username(Account Detail)" & "Logout" -->
-      <% if @current_account %>
+      <% if @current_account.login? %>
         <li class="nav-item">
-          <a class="nav-link" href="/account/<%= @current_account['username']%>" >
-            <%= @current_account['username'] %>
+          <a class="nav-link" href="/account/<%= @current_account.username%>" >
+            <%= @current_account.username %>
           </a>
         </li>
         <li class="nav-item">
