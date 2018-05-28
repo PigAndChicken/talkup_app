@@ -8,7 +8,7 @@ class CreateAccount
   end
 
   def call(username, email, password)
-    account_response =  ApiGateway.new.account_create(
+    account_response = TalkUp::ApiGateway.new.account_create(
                       { username: username, email: email, password: password })
 
     raise(InvalidAccount) unless account_response.code == 201

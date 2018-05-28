@@ -2,8 +2,7 @@ module TalkUp
   module Views
     # View objects for current account data
     class CurrentAccount
-      def initialize(session, account_info=(TalkUp::AccountRepresenter.new(OpenStruct.new).from_json nil))
-        @session = session
+      def initialize(account_info)
         @account_info = account_info
       end
 
@@ -16,13 +15,7 @@ module TalkUp
       end
 
       def login?
-        session_data = SecureSession.new(@session).get(:current_account)
-        return false unless session_data
-      end
-
-      def session_data
-        session_data = SecureSession.new(@session).get(:current_account)
-        session_data
+        @account_info.username.nil? ? false : true
       end
 
     end

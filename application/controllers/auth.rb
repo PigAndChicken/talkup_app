@@ -16,13 +16,12 @@ module TalkUp
                                                 .call(routing.params['username'],
                                                       routing.params['password'])
           SecureSession.new(session).set(:current_account, account_response.message)
-          @account_info = AccountRepresenter.new(OpenStruct.new)
-                                            .from_json account_response.message
-          @current_account = Views::CurrentAccount.new(session, @account_info)
+          account_info = AccountRepresenter.new(OpenStruct.new)
+                                           .from_json account_response.message
+          @current_account = Views::CurrentAccount.new(account_info)
 
           flash[:notice] = "Welcome to TalkUp, #{@current_account.username}!"
           routing.redirect '/'
-          # view 'home', locals: { current_account: @current_account }
         rescue StandardError => error
           flash[:error] = error
           # flash[:error] = 'Username and password did not match records'
@@ -33,7 +32,6 @@ module TalkUp
       routing.on 'logout' do
         # GET /auth/logout
         routing.get do
-          # session[:current_account] = nil
           SecureSession.new(session).delete(:current_account)
           routing.redirect @login_route
         end

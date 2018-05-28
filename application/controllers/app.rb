@@ -14,10 +14,9 @@ module TalkUp
     require_relative 'account'
 
     route do |routing|
-      # @current_account = session[:current_account]
-      # @current_account = JSON.parse @current_account if @current_account
-      # session_data = SecureSession.new(session).get(:current_account)
-      @current_account = Views::CurrentAccount.new(session) unless session[:current_account]
+      session_data = SecureSession.new(session).get(:current_account)
+      account_info = AccountRepresenter.new(OpenStruct.new).from_json session_data
+      @current_account = Views::CurrentAccount.new(account_info)
 
       routing.assets
       routing.multi_route
