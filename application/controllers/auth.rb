@@ -46,9 +46,10 @@ module TalkUp
 
         # POST /auth/register
         routing.post do
-          CreateAccount.new(App.config).call(routing.params['username'],
-                                             routing.params['email'],
-                                             routing.params['password'])
+          AccountService.new(App.config)
+                        .create_account(routing.params['username'],
+                                        routing.params['email'],
+                                        routing.params['password'])
 
           flash[:notice] = "Please login with your account information"
           routing.redirect @login_route

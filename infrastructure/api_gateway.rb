@@ -40,6 +40,10 @@ module TalkUp
       call_api(:post, ['accounts'] , account_info_hash)
     end
 
+    def account_delete(username)
+      call_api(:delete, ['accounts', username], nil)
+    end
+
     def account_info(username)
       call_api(:get, ['accounts', username], nil)
     end

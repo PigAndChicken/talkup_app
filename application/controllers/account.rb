@@ -11,6 +11,14 @@ module TalkUp
           end
         end
 
+        # DELETE /account/[username]
+        routing.delete String do |username|
+          AccountService.new(App.config).delete_account(username)
+
+          flash[:notice] = 'Account deleted.'
+          routing.redirect '/'
+        end
+
       end
     end
   end

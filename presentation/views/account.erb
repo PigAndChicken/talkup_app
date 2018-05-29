@@ -38,7 +38,32 @@
         <div class="col-lg-12">
           <div class="bs-component">
             <button type="button" class="btn btn-primary"
-                    id="button-accout-check" onclick="history.back()"> BACK </button>
+                    id="button-account-check" onclick="history.back()"> BACK </button>
+          </div>
+        </div>
+
+        <!-- <div class="col-lg-12">
+          <div class="bs-component">
+            <button type="button" class="btn btn-primary" id="button-account-delete"
+                    data-target="/account/<%= @current_account.username%>"
+                    data-method="DELETE" data-disabled="true"> DELETE ACCOUNT </button>
+
+            <script>
+              $('#button-account-delete').on('click', function() {
+                if (confirm("Are you sure you want to delete the account?"))
+                { $.ajax({
+                    url: '/account/<%= @current_account.username%>',
+                    method: 'DELETE',
+                  })
+                   .done(function() {
+                     console.log('deleted');
+                     window.location='/';
+                  });
+                }
+              });
+            </script> -->
+
+
           </div>
         </div>
       </div>
