@@ -37,6 +37,8 @@ module TalkUp
     end
 
     def account_create(account_info_hash)
+      #如果account_info_hash裡面沒有password的value的話，後端API會寄信
+      #如果有password value 的話，API會直接create account
       call_api(:post, ['accounts'] , account_info_hash)
     end
 
