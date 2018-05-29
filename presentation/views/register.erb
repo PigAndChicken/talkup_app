@@ -12,6 +12,10 @@
       <div class="bs-component">
         <form action="/auth/register" method="post" id="form-register">
           <fieldset>
+          <%# 可以用if else 判斷現在要呈現哪種form %>
+          <%# 有form with username ane email 跟 form with password and confirmed_password的 %>
+          <%# 建另一個erb 用render的方式跑出不同的form %>
+          <%# 可以在controller裡面傳一個物件(Account之類的)來判斷現在要render哪一種form %>
             <div class="form-group">
               <label for="InputUserName" class="font-weight-bold">User Name</label>
               <input name="username" class="form-control" id="InputUserName"

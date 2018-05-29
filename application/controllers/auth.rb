@@ -44,8 +44,13 @@ module TalkUp
           view :register
         end
 
+        #要建另一個route branch 給 url 後面加上token的，這個token會是使用者輸入的username&email的json加密而成的
+
         # POST /auth/register
         routing.post do
+          #可以建另一個Servic，這個Service要做的事可以有，跟建立verification_url(原本url加上tokem)，並連接後端api寄出email
+          #可以用if else 判斷 要執行哪一個Service
+          #並redirect to 不同的頁面
           CreateAccount.new(App.config).call(routing.params['username'],
                                              routing.params['email'],
                                              routing.params['password'])
