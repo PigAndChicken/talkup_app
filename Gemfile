@@ -25,7 +25,7 @@ gem 'redis-rack'
 
 # Application related
 gem 'dry-validation'
-gem 'multi-json'
+gem 'multi_json'
 gem 'roar'
 
 # Services
