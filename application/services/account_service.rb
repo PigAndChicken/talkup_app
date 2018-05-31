@@ -7,9 +7,8 @@ class AccountService
     @config = config
   end
 
-  def create_account(username, email, password)
-    create_response = TalkUp::ApiGateway.new.account_create(
-                      { username: username, email: email, password: password })
+  def create_account(new_account_info)
+    create_response = TalkUp::ApiGateway.new.account_create(new_account_info)
 
     raise(InvalidAccount) unless create_response.code == 201
   end

@@ -14,8 +14,16 @@ module TalkUp
         @account_info.email
       end
 
+      def registration_token
+        @account_info.registration_token
+      end
+
+      def logout?
+        @account_info.username.nil?
+      end
+
       def login?
-        @account_info.username.nil? ? false : true
+        not logout?
       end
 
     end

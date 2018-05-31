@@ -37,6 +37,7 @@ module TalkUp
     end
 
     def account_create(account_info_hash)
+      # Backend would send verification email if account_info_hash[:password].nil?
       call_api(:post, ['accounts'] , account_info_hash)
     end
 

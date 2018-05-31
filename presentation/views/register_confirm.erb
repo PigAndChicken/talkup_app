@@ -1,0 +1,45 @@
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Secret Setting</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="bs-component">
+        <form action="/account/<%= @new_account.registration_token %>"
+              method="post" id="form-register">
+          <fieldset>
+            <div class="form-group">
+              <label class="font-weight-bold">User Name</label>
+              <p>
+                <%= @new_account.username %>
+              </p>
+
+              <label class="font-weight-bold">Email</label>
+              <p>
+                <%= @new_account.email %>
+              </p>
+
+              <label for="inputPassword" class="font-weight-bold">Password</label>
+              <input name="password" type="password" class="form-control"
+                     id="inputPassword" placeholder="Your password">
+
+              <label for="inputPassword" class="font-weight-bold">Password Confirm</label>
+              <input name="password_confirm" type="password" class="form-control"
+                     id="confirmPassword" placeholder="Enter your password again">
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="bs-component">
+          <button type="submit" class="btn btn-secondary"
+                  form="form-register" id="button-register"> REGISTER </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

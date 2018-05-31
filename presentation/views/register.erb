@@ -10,30 +10,26 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="bs-component">
-        <form action="/auth/register" method="post" id="form-register">
+        <form action="/auth/register" method="post" id="form-emailing">
           <fieldset>
             <div class="form-group">
-              <label for="InputUserName" class="font-weight-bold">User Name</label>
-              <input name="username" class="form-control" id="InputUserName"
+              <label for="inputUserName" class="font-weight-bold">User Name</label>
+              <input name="username" class="form-control" id="inputUserName"
                      aria-describedby="userNameHelp" placeholder="User name for login">
               <small id="userNameHelp" class="form-text text-muted">
                 User name will be used for login.
               </small>
 
-              <label for="InputEmail" class="font-weight-bold">Email</label>
+              <label for="inputEmail" class="font-weight-bold">Email</label>
               <input name="email" class="form-control"
-                     id="InputEmail" placeholder="Your email address">
-
-              <label for="InputPassword" class="font-weight-bold">Password</label>
-              <input name="password" type="password" class="form-control"
-                     id="exampleInputPassword" placeholder="Your password">
+                     id="inputEmail" placeholder="Your email address">
             </div>
           </fieldset>
         </form>
 
         <div class="bs-component">
           <button type="submit" class="btn btn-secondary"
-                  form="form-register" id="button-register"> SUBMIT </button>
+                  form="form-emailing" id="button-register"> VERIFY </button>
         </div>
       </div>
     </div>
