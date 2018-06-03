@@ -22,9 +22,8 @@ module TalkUp
 
           flash[:notice] = "Welcome to TalkUp, #{@current_account.username}!"
           routing.redirect '/'
-        rescue StandardError => error
-          flash[:error] = error
-          # flash[:error] = 'Username and password did not match records'
+        rescue StandardError
+          flash[:error] = 'Username and password did not match records'
           routing.redirect @login_route
         end
       end
@@ -49,16 +48,22 @@ module TalkUp
           # POST /auth/register
           routing.post do
             registration_data = JsonRequestBody.symbolize(routing.params)
+            registration = Form::Registration.call(registration_data)
+
+            if registration.failure?
+              flash[:error] = Form.validation_errors(registration)
+              routing.redirect @register_route
+            end
+
             VerifyRegistration.new(App.config)
-                              .send_verification_email(registration_data)
+                              .send_verification_email(registration)
 
             flash[:notice] = 'Please check your email for a verification link'
             routing.redirect '/'
           rescue StandardError => error
             puts "ERROR SREATING ACCOUNT: #{error.inspect}"
             puts error.backtrace
-            flash[:error] = error
-            # flash[:error] = 'Account details are not valid: please check username & email'
+            flash[:error] = 'Account details are not valid: please check username & email'
             routing.redirect @register_route
           end
         end
@@ -73,23 +78,6 @@ module TalkUp
           flash.now[:notice] = 'Email verified! Please choose a new password'
           view :register_confirm, locals: { new_account: @new_account }
         end
-
-        # The registration link with token (Post password to register)
-        # POST /auth/register/[token]
-        # routing.post String do |token|
-        #   AccountService.new(App.config)
-        #                 .create_account(routing.params['username'],
-        #                                 routing.params['email'],
-        #                                 routing.params['password'])
-        #
-        #   flash[:notice] = "Please login with your account information"
-        #   routing.redirect @login_route
-        # rescue StandardError => error
-        #   puts "ERROR CREATING ACCOUNT: #{error.inspect}"
-        #   puts error.backtrace
-        #   flash[:error] = 'Could not create account'
-        #   routing.redirect @register_route
-        # end
 
       end
     end

@@ -24,7 +24,7 @@ gem 'redis'
 gem 'redis-rack'
 
 # Application related
-gem 'dry-validation'
+gem 'dry-validation', '~> 0.12.0'
 gem 'multi_json'
 gem 'roar'
 
