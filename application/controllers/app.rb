@@ -5,13 +5,14 @@ module TalkUp
   # Base class for TalkUp Web Application
   class App < Roda
     plugin :render, views: 'presentation/views'
-    plugin :assets, css: 'style.css', path: 'presentation/assets/css'
+    plugin :assets, css: 'style.css', path: 'presentation/assets'
     # plugin :public, root: 'presentation/public'
     plugin :flash
     plugin :multi_route
 
     require_relative 'auth'
     require_relative 'account'
+    require_relative 'issue'
 
     route do |routing|
       session_data = SecureSession.new(session).get(:current_account)

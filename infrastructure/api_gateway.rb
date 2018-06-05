@@ -54,6 +54,14 @@ module TalkUp
                       { username: username, password: password })
     end
 
+    def issue_info(issue_id)
+      call_api(:get, ['issue', issue_id], nil)
+    end
+
+    def issue_create(username, issue_info_hash)
+      call_api(:post, ['issue'], { username: username, issue_data: issue_info_hash })
+    end
+
     def call_api(method, resources, data)
       url_route = [@config.API_URL, resources].flatten.join'/'
 

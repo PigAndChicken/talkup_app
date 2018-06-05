@@ -11,9 +11,9 @@
   </p>
   <p class="lead">
     <% if @current_account.login? %>
-      <a class="btn btn-primary btn-lg" href="/account/<%= @current_account.username %>" role="button">Enter</a>
+      <a class="btn btn-lg" href="/account/<%= @current_account.username %>" role="button">Enter</a>
     <% else %>
-      <a class="btn btn-primary btn-lg" href="/auth/login" role="button">Get Start</a>
+      <a class="btn btn-lg" href="/auth/login" id="btn_start" role="button">Get Start</a>
     <% end %>
   </p>
 </div>

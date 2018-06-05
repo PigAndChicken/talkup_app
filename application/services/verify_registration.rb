@@ -1,5 +1,3 @@
-require 'http'
-
 module TalkUp
   # Returns an
   class VerifyRegistration

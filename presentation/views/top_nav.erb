@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">Talk Up</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarColor02" aria-controls="navbarColor02"
@@ -13,8 +13,15 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="/issue/overview">Issue</a>
+      </li>
+
       <!-- if login status, navbar shows "Username(Account Detail)" & "Logout" -->
       <% if @current_account.login? %>
+        <li class="nav-item">
+          <a class="nav-link" href="/issue/create">New-Issue</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/account/<%= @current_account.username%>" >
             <%= @current_account.username %>

@@ -1,11 +1,18 @@
-.container {
-  padding-top: 5%;
+.btn {
+  font-weight: bold;
+  color: white;
+  background-color: #888;
 }
 
-#button-login {
-  font-weight: bold;
+.card {
+  background-color: #888;
+  max-width: 20rem;
 }
 
 #footer {
   padding-left: 5%;
+}
+
+.h1 {
+  color: #4e413b;
 }

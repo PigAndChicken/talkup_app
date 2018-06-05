@@ -1,5 +1,3 @@
-require 'http'
-
 module TalkUp
   # Return an authenticated user, or nil
   class AuthenticateAccount
