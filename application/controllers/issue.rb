@@ -22,7 +22,7 @@ module TalkUp
           new_issue_info = JsonRequestBody.symbolize(routing.params)
 
           @create_response = IssueService.new(App.config)
-                                        .create_issue(@current_account.username, new_issue_info)
+                                         .create_issue(@current_account.username, new_issue_info)
           issue_info = IssueRepresenter.new(OpenStruct.new)
                                        .from_json @create_response.message
           @new_issue = Views::Issue.new(issue_info)
