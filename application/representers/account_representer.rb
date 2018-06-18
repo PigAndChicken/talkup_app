@@ -4,6 +4,6 @@ module TalkUp
 
     property :username
     property :email
-    property :registration_token
+    property :token
   end
 end

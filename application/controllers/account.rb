@@ -4,6 +4,7 @@ module TalkUp
       routing.on do
         @login_route = '/auth/login'
         # GET /account/[username]
+        ## To see account detail
         routing.get String do |username|
           if @current_account.login? && @current_account.username == username
             view :account, locals: { current_account: @current_account }
@@ -12,6 +13,8 @@ module TalkUp
           end
         end
 
+        # POST /account/[registration_token]
+        ## Set the password to create an account
         routing.post String do |registration_token|
           raise 'Password did not match or empty' if
             routing.params['password'].empty? ||

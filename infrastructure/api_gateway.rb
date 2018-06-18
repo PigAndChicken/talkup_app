@@ -50,9 +50,15 @@ module TalkUp
       call_api(:get, ['accounts', username], nil)
     end
 
+    ### Api for authentication
     def account_auth(username, password)
       call_api(:post, ['accounts', 'authenticate'],
                       { username: username, password: password })
+    end
+
+    def get_sso_account(access_token)
+      call_api(:post, ['auth', 'authenticate', 'sso_account'],
+                      {access_token: access_token})
     end
 
     ### Api for issues

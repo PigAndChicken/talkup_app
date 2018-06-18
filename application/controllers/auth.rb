@@ -1,13 +1,29 @@
 module TalkUp
-  # Web App for login (authentication)
+  # Web App for authentication (login/register)
   class App < Roda
 
     route('auth') do |routing|
+      def gh_oauth_url(config = App.config)
+        gh_oauth_url = config.GH_OAUTH_URL
+        client_id = config.GH_CLIENT_ID
+        scope = config.GH_SCOPE
+
+        "#{gh_oauth_url}?client_id=#{client_id}&scope=#{scope}"
+      end
+
+      def account_info_handling(account_json)
+        SecureSession.new(session).set(:current_account, account_json)
+        account_info = AccountRepresenter.new(OpenStruct.new)
+                                         .from_json account_json
+        current_account = Views::CurrentAccount.new(account_info)
+        current_account
+      end
+
       @login_route = '/auth/login'
-      routing.on 'login' do
+      routing.is 'login' do
         # GET /auth/login
         routing.get do
-          view :login
+          view :login, locals: { gh_oauth_url: gh_oauth_url }
         end
 
         # POST /auth/login
@@ -15,10 +31,7 @@ module TalkUp
           account_response = AuthenticateAccount.new(App.config)
                                                 .call(routing.params['username'],
                                                       routing.params['password'])
-          SecureSession.new(session).set(:current_account, account_response.message)
-          account_info = AccountRepresenter.new(OpenStruct.new)
-                                           .from_json account_response.message
-          @current_account = Views::CurrentAccount.new(account_info)
+          @current_account = account_info_handling(account_response.message)
 
           flash[:notice] = "Welcome to TalkUp, #{@current_account.username}!"
           routing.redirect '/'
@@ -28,13 +41,25 @@ module TalkUp
         end
       end
 
-      routing.on 'logout' do
+      routing.is 'sso_callback' do
+        # GET /auth/sso_callback
+        routing.get do
+          sso_account = AuthenticateGithubAccount.new
+                                                 .call(routing.params['code'])
+          @current_account = account_info_handling(sso_account.message)
+          flash[:notice] = "Welcome to TalkUp, #{@current_account.username}!"
+          routing.redirect '/'
+        end
+      end
+
+      routing.is 'logout' do
         # GET /auth/logout
         routing.get do
           SecureSession.new(session).delete(:current_account)
           routing.redirect @login_route
         end
       end
+
 
       @register_route = '/auth/register'
       routing.on 'register' do

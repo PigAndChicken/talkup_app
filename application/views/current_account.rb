@@ -15,7 +15,7 @@ module TalkUp
       end
 
       def registration_token
-        @account_info.registration_token
+        @account_info.token
       end
 
       def logout?
