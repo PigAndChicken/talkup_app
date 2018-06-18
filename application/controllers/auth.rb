@@ -28,6 +28,14 @@ module TalkUp
 
         # POST /auth/login
         routing.post do
+          login_data = JsonRequestBody.symbolize(routing.params)
+          credentials = Form::LoginCredentials.call(login_data)
+
+          if credentials.failure?
+            flash[:error] = Form.validation_errors(credentials)
+            routing.redirect @login_route
+          end
+
           account_response = AuthenticateAccount.new(App.config)
                                                 .call(routing.params['username'],
                                                       routing.params['password'])
