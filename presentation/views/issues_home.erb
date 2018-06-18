@@ -4,7 +4,7 @@
     <div class="col-md-4">
       <div class="card bg-light border-light mb-3 py-4" style="background-color: #aaaaaa; color: #0f3057;max-width: 20rem;">
         <div class="card-body">
-          <h4 class="card-title">Title</h4>
+          <h4 class="card-title"><a href="" id="section1">Section 1</a></h4>
           <p class="card-text">I'm not sure what is this for</p>
         </div>
       </div>
@@ -13,7 +13,7 @@
     <div class="col-md-4">
       <div class="card bg-light border-light mb-3 py-4" style="background-color: #aaaaaa; color: #0f3057;max-width: 20rem;">
         <div class="card-body">
-          <h4 class="card-title">Title</h4>
+          <h4 class="card-title"><a href="#section2" id="section2">Section 2</a></h4>
           <p class="card-text">I'm not sure what is this for</p>
         </div>
       </div>
@@ -22,7 +22,7 @@
     <div class="col-md-4">
       <div class="card bg-light border-light mb-3 py-4" style="background-color: #aaaaaa; color: #0f3057;max-width: 20rem;">
         <div class="card-body">
-          <h4 class="card-title">Title</h4>
+          <h4 class="card-title">Section 3</h4>
           <p class="card-text">I'm not sure what is this for</p>
         </div>
       </div>
@@ -31,11 +31,24 @@
   </div>
 </div>
 
+<script>
+var get_content = function(issue_section){
+  $.get("#{App.config.APP_URL}/issue/section/#{issue_section}")
+}
+  $("#section2 a").click(function(e){
+    get_content(2);
+
+    // e.preventDefault();
+    // $("#issue_card").hide();
+    // var toShow = $(this).attr('href');
+    // $(toShow).show();
+  });
+</script>
 
 <div class="jumbotron bg-white">
   <div class="row col-md-6 col-md-offset-3 mx-auto">
 
-    <div class="card text-white bg-primary mb-5" style="max-width: 100rem;">
+    <div class="card text-white bg-primary mb-5" id="issue_card" style="max-width: 100rem;">
       <div class="card-header">Issue 1</div>
       <div class="card-body">
         <h4><a class="card-title text-white" href="/issue/1">Issue Title One</a></h4>

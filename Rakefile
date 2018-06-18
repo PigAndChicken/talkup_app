@@ -12,14 +12,9 @@ task :print_env do
   puts "Environment: #{ENV['RACK_ENV'] || 'development'}"
 end
 
-desc 'Test api_spec only'
-task :api_spec do
-  sh 'ruby specs/api_spec.rb'
-end
-
-desc 'Run all tests'
-Rake::TestTask.new(:spec) do |t|
-  t.pattern = 'specs/*_spec.rb'
+desc 'Run all api tests'
+Rake::TestTask.new(:api_spec) do |t|
+  t.pattern = 'specs/api/*_spec.rb'
   t.warning = false
 end
 

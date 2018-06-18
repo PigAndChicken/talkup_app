@@ -36,6 +36,7 @@ module TalkUp
       @config = config
     end
 
+    ### Api for accounts
     def account_create(account_info_hash)
       # Backend would send verification email if account_info_hash[:password].nil?
       call_api(:post, ['accounts'] , account_info_hash)
@@ -52,6 +53,11 @@ module TalkUp
     def account_auth(username, password)
       call_api(:post, ['accounts', 'authenticate'],
                       { username: username, password: password })
+    end
+
+    ### Api for issues
+    def all_issues(issue_section)
+      call_api(:get, ['issues', issue_section], nil)
     end
 
     def issue_info(issue_id)

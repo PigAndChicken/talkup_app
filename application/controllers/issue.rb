@@ -3,11 +3,30 @@ module TalkUp
     route('issue') do |routing|
 
       @issue_route = '/issue/overview'
-      routing.on 'overview' do
-        # GET /issue/overview
-        routing.get do
-          view 'issues_home'
-        end
+      # GET /issue/overview
+      routing.get 'overview' do
+        # routing.get do
+        #   response = IssueService.new.get_all_issues(issue_section)
+        #
+        #   all_issues_arr = (JSON.parse response.message)["issues"]
+        #   @all_issues = all_issues_arr.map { |issue|
+        #     IssueRepresenter.new(OpenStruct.new).from_json issue.to_json
+        #   }
+        #   view 'issues_home', locals: { all_issues: @all_issues }
+        view 'issues_home'
+        # end
+      end
+
+      # Get issue list of a section
+      # GET /issue/section/[:issue_section]
+      routing.get 'section', Integer do |issue_section|
+        response = IssueService.new.get_all_issues(issue_section)
+
+        all_issues_arr = (JSON.parse response.message)["issues"]
+        @all_issues = all_issues_arr.map { |issue|
+          IssueRepresenter.new(OpenStruct.new).from_json issue.to_json
+        }
+        @all_issues
       end
 
       @issue_create_route = '/issue/create'
@@ -21,8 +40,8 @@ module TalkUp
         routing.post do
           new_issue_info = JsonRequestBody.symbolize(routing.params)
 
-          @create_response = IssueService.new(App.config)
-                                         .create_issue(@current_account.username, new_issue_info)
+          @create_response = IssueService.new.create_issue(@current_account.username,
+                                                           new_issue_info)
           issue_info = IssueRepresenter.new(OpenStruct.new)
                                        .from_json @create_response.message
           @new_issue = Views::Issue.new(issue_info)

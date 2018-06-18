@@ -17,7 +17,7 @@ DATA.each_key do |key|
 end
 
 #####
-@new_issue_info = DATA[:issues][0]
-@create_response = TalkUp::IssueService.new(app.config).create_issue("Vic", @new_issue_info)
-@issue_info = TalkUp::IssueRepresenter.new(OpenStruct.new).from_json @create_response.message
-@new_issue = TalkUp::Views::Issue.new(@issue_info)
+# @new_issue_info = DATA[:issues][0]
+# @create_response = TalkUp::IssueService.new(app.config).create_issue("Vic", @new_issue_info)
+# @issue_info = TalkUp::IssueRepresenter.new(OpenStruct.new).from_json @create_response.message
+# @new_issue = TalkUp::Views::Issue.new(@issue_info)

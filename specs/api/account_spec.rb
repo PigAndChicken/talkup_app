@@ -1,4 +1,4 @@
-require_relative './spec_helper.rb'
+require_relative '../spec_helper.rb'
 
 describe 'Test Api gateway' do
   before do
@@ -24,7 +24,7 @@ describe 'Test Api gateway' do
     describe 'Get account info' do
 
       it 'HAPPY: should be able to get account information' do
-        response = @gateway.account_info(DATA[:accounts][0]['username'])
+        response = @gateway.account_info(DATA[:accounts][0][:username])
         _(response.code).must_equal 200
         _(response.message).must_include 'Vic'
         _(response.message).must_include 'xumingyo'
@@ -39,8 +39,8 @@ describe 'Test Api gateway' do
 
     describe 'Account authentication' do
       it 'HAPPY: should authenticate account if correct credentials provided' do
-        response = @gateway.account_auth(DATA[:accounts][0]['username'],
-                                         DATA[:accounts][0]['password'])
+        response = @gateway.account_auth(DATA[:accounts][0][:username],
+                                         DATA[:accounts][0][:password])
         _(response.code).must_equal 200
         _(response.message).must_include 'Vic'
         _(response.message).must_include 'xumingyo'
